@@ -5,7 +5,6 @@ class ChannelsController < ApplicationController
     else
       @channel = Channel.find_by(name: params[:id])
       @channels = Channel.all
-      binding.pry
     end
   end
 end
