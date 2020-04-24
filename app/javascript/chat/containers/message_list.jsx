@@ -9,6 +9,7 @@ import MessageForm from '../containers/message_form';
 class MessageList extends Component {
   UNSAFE_componentWillMount() {
     this.fetchMessages();
+    // dispatch(fetchMessages());
   }
 
   componentDidMount() {

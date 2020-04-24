@@ -13,7 +13,6 @@ class Api::V1::MessagesController < ApplicationController
       }
       new_messages_array << reformatted_message
     end
-
     render json: new_messages_array
   end
 

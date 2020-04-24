@@ -1,19 +1,29 @@
 // const BASE_URL = 'https://wagon-chat.herokuapp.com';
+import { createAsyncAction } from 'redux-promise-middleware-actions';
 
 export const FETCH_MESSAGES = 'FETCH_MESSAGES';
 export const MESSAGE_POSTED = 'MESSAGE_POSTED';
 export const CHANNEL_SELECTED = 'CHANNEL_SELECTED';
 
-export function fetchMessages(channel) {
-  const url = `/api/v1/channels/${channel}/messages`;
-  const promise = fetch(url, { credentials: "same-origin" })
-                    .then(r => r.json());
+// export function fetchMessages(channel) {
+  // return {
+  //   type: FETCH_MESSAGES,
+  //   payload: fetch(url)
+  //     .then(response => respsonse.json())
+  //     .then((data) => {
+  //       debugger
+  //       return data;
+  //     })
+  // }
+// }
 
-  return {
-    type: FETCH_MESSAGES,
-    payload: promise // Will be resolved by redux-promise
-  };
-}
+const url = `/api/v1/channels/general/messages`;
+
+export const fetchMessages = () => createAsyncAction('FETCH_MESSAGES', async () => {
+    const result = await fetch(url);
+    return result.json();
+});
+
 
 export function createMessage(channel, content) {
   const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;

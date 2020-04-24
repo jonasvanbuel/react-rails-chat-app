@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import reduxPromise from 'redux-promise';
+import promiseMiddleware from 'redux-promise-middleware'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // internal modules
@@ -27,7 +27,7 @@ const reducers = combineReducers({
 });
 
 // Middlewares
-const middlewares = applyMiddleware(reduxPromise, logger);
+const middlewares = applyMiddleware(promiseMiddleware, logger);
 const store = createStore(reducers, initialState, middlewares);
 
 // render an instance of the component in the DOM

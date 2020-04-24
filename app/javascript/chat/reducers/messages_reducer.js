@@ -2,7 +2,10 @@ import { FETCH_MESSAGES, MESSAGE_POSTED, CHANNEL_SELECTED } from '../actions';
 
 export default function(state = null, action) {
   switch (action.type) {
-    case FETCH_MESSAGES: {
+    case `${FETCH_MESSAGES}_PENDING`: {
+      return state;
+    }
+    case `${FETCH_MESSAGES}_FULFILLED`: {
       return action.payload;
     }
     case MESSAGE_POSTED: {
