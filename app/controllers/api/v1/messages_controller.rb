@@ -1,5 +1,5 @@
 class Api::V1::MessagesController < ApplicationController
-  before_action :set_channel, only: :index
+  before_action :set_channel
 
   def index
     original_messages = Message.where(channel_id: @param_channel.id)
@@ -18,6 +18,13 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   def create
+    message = Message.new(
+      content: params[:content],
+      user: current_user,
+      channel: @param_channel
+    )
+    message.save
+    render json: message
   end
 
   private

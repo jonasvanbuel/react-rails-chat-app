@@ -3,10 +3,12 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import { selectChannel, fetchMessages } from '../actions/index';
 
 class ChannelList extends Component {
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedChannel !== this.props.selectedChannel) {
       this.props.fetchMessages(nextProps.selectedChannel);
     }
@@ -21,10 +23,11 @@ class ChannelList extends Component {
       <li
         key={channel}
         className={channel === this.props.selectedChannel ? 'active' : null}
-        onClick={() => this.handleClick(channel)}
         role="presentation"
       >
-        #{channel}
+        <Link to={`/channels/${channel}`}>
+          #{channel}
+        </Link>
       </li>
     );
   }
