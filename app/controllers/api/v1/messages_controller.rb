@@ -24,7 +24,13 @@ class Api::V1::MessagesController < ApplicationController
       channel: @param_channel
     )
     message.save
-    render json: message
+    reformatted_message = {
+      id: message.id,
+      author: User.find(message.user_id).email,
+      content: message.content,
+      created_at: message.created_at
+    }
+    render json: reformatted_message
   end
 
   private
